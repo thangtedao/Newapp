@@ -7,6 +7,10 @@ import {
   Register,
   Error,
   DashboardLayout,
+  AddJob,
+  Stats,
+  Profile,
+  Admin,
 } from "../src/pages/index.js";
 
 const router = createBrowserRouter([
@@ -21,16 +25,23 @@ const router = createBrowserRouter([
         element: <Landing />,
       },
       {
-        path: "/register",
+        path: "register",
         element: <Register />,
       },
       {
-        path: "/login",
+        path: "login",
         element: <Login />,
       },
       {
-        path: "/dashboard",
+        path: "dashboard",
         element: <DashboardLayout />,
+        children: [
+          { index: true, element: <AddJob /> },
+          { path: "all-jobs", element: <Stats /> },
+          { path: "stats", element: <Stats /> },
+          { path: "profile", element: <Profile /> },
+          { path: "admin", element: <Admin /> },
+        ],
       },
     ],
   },
