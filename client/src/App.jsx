@@ -6,6 +6,7 @@ import {
   Login,
   Register,
   Error,
+  DashboardLayout,
 } from "../src/pages/index.js";
 
 const router = createBrowserRouter([
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
+      },
+      {
+        path: "/dashboard",
+        element: <DashboardLayout />,
       },
     ],
   },
