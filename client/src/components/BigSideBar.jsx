@@ -13,7 +13,7 @@ const Wrapper = styled.aside`
     background: var(--background-secondary-color);
     min-height: 100vh;
     height: 100%;
-    width: 15rem;
+    width: 250px;
     margin-left: -250px;
     transition: margin-left 0.3s ease-in-out;
   }
@@ -71,7 +71,7 @@ const BigSideBar = () => {
       >
         <div className="content">
           <header>
-            <h4>Put Logo here</h4>
+            <h4>Logo</h4>
           </header>
           <NavLinks isBigSideBar />
         </div>

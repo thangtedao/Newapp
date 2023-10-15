@@ -15,7 +15,6 @@ const Wrapper = styled.section`
   }
   @media (min-width: 992px) {
     .dashboard {
-      display: grid;
       grid-template-columns: auto 1fr;
     }
     .dashboard-page {
@@ -26,13 +25,16 @@ const Wrapper = styled.section`
 
 const DashboardContext = createContext();
 
-const DashboardLayout = () => {
+const DashboardLayout = ({ isDarkThemeEnabled }) => {
   const user = { name: "thang" };
   const [showSideBar, setShowSideBar] = useState(false);
-  const [isDarkTheme, setIsDarkTheme] = useState(false);
+  const [isDarkTheme, setIsDarkTheme] = useState(isDarkThemeEnabled);
 
   const toggleDarkTheme = () => {
+    const newDarkTheme = !isDarkTheme;
     setIsDarkTheme(!isDarkTheme);
+    document.body.classList.toggle("dark-theme", newDarkTheme);
+    localStorage.setItem("dark-theme", newDarkTheme);
   };
 
   const toggleSideBar = () => {

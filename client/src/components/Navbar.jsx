@@ -2,12 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import { FaAlignLeft } from "react-icons/fa";
 import { useDashboardContext } from "../pages/DashboardLayout";
+import LogoutContainer from "./LogoutContainer";
+import ThemeToggle from "./ThemeToggle";
 
 const Wrapper = styled.section`
   display: flex;
   align-items: center;
-  height: var(--nav-height);
   justify-content: center;
+  height: var(--nav-height);
   box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1);
   background: var(--background-secondary-color);
   .nav-center {
@@ -41,7 +43,7 @@ const Wrapper = styled.section`
     position: sticky;
     top: 0;
     .nav-center {
-      width: 90vw;
+      width: 90%;
     }
     .logo {
       display: none;
@@ -64,7 +66,10 @@ const Navbar = () => {
           <h4 className="logo">Put logo here</h4>
           <h4 className="logo-text">dashboard</h4>
         </div>
-        <div className="btn-container">toggle/logout</div>
+        <div className="btn-container">
+          <ThemeToggle />
+          <LogoutContainer />
+        </div>
       </div>
     </Wrapper>
   );

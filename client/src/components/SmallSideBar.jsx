@@ -5,6 +5,7 @@ import { useDashboardContext } from "../pages/DashboardLayout";
 import NavLinks from "./NavLinks";
 
 const Wrapper = styled.aside`
+  display: block;
   @media (min-width: 992px) {
     display: none;
   }
