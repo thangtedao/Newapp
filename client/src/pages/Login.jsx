@@ -1,7 +1,24 @@
 import React from "react";
 import styled from "styled-components";
 import { FormRow } from "../components";
-import { Link } from "react-router-dom";
+import { Link, Form, redirect, useNavigation } from "react-router-dom";
+import customFetch from "../utils/customFetch.js";
+import { toast } from "react-toastify";
+
+export const action = async ({ request }) => {
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+  try {
+    // lỗi 409 conflict ngày trước xảy ra nhưng ko hiện toast là do toast show "msg"
+    // mà trong file controller trong server return error thì lại để object là message thay vì msg
+    await customFetch.post("/auth/login", data);
+    toast.success("Login successful");
+    return redirect("/dashboard");
+  } catch (error) {
+    toast.error(error?.response?.data?.msg);
+    return error;
+  }
+};
 
 const Wrapper = styled.section`
   min-height: 100vh;
@@ -36,14 +53,17 @@ const Wrapper = styled.section`
 `;
 
 const Login = () => {
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === "submitting";
+
   return (
     <Wrapper>
-      <form className="form">
+      <Form method="post" className="form">
         <h4>Login</h4>
         <FormRow type="text" name="email" defaultValue="thang@gmail.com" />
         <FormRow type="text" name="password" defaultValue="123" />
-        <button type="submit" className="btn btn-block">
-          Submit
+        <button type="submit" className="btn btn-block" disabled={isSubmitting}>
+          {isSubmitting ? "submitting..." : "submit"}
         </button>
         <button className="btn btn-block">Demo User</button>
         <p>
@@ -52,7 +72,7 @@ const Login = () => {
             Register
           </Link>
         </p>
-      </form>
+      </Form>
     </Wrapper>
   );
 };

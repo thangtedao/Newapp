@@ -20,8 +20,8 @@ app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(cors());
 
-app.get("/test", (req, res) => {
-  res.json({ msg: "Hello" });
+app.get("/api/test", (req, res) => {
+  res.json({ msg: "test route" });
 });
 
 /*
@@ -30,9 +30,9 @@ app.get("/test", (req, res) => {
     })
 */
 
-app.use("/job", authenticateUser, jobRouter);
-app.use("/user", authenticateUser, userRouter);
-app.use("/auth", authRouter);
+app.use("/api/job", authenticateUser, jobRouter);
+app.use("/api/user", authenticateUser, userRouter);
+app.use("/api/auth", authRouter);
 
 // Not Found Middleware
 app.use("*", (req, res) => {
