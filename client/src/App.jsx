@@ -11,10 +11,14 @@ import {
   Stats,
   Profile,
   Admin,
-} from "../src/pages/index.js";
+} from "./pages/index.js";
 
-import { action as register } from "../src/pages/Register.jsx";
-import { action as login } from "../src/pages/Login.jsx";
+/* ACTION */
+import { action as register } from "./pages/Register.jsx";
+import { action as login } from "./pages/Login.jsx";
+
+/* LOADER */
+import { loader as dashboard } from "./pages/DashboardLayout.jsx";
 
 const checkDefaultTheme = () => {
   const isDarkTheme = localStorage.getItem("darkTheme") === "true";
@@ -49,6 +53,7 @@ const router = createBrowserRouter([
       {
         path: "dashboard",
         element: <DashboardLayout isDarkThemeEnabled={isDarkThemeEnabled} />,
+        loader: dashboard,
         children: [
           { index: true, element: <AddJob /> },
           { path: "all-jobs", element: <Stats /> },
