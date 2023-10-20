@@ -16,16 +16,19 @@ import {
 /* ACTION */
 import { action as register } from "./pages/Register.jsx";
 import { action as login } from "./pages/Login.jsx";
+import { action as addJob } from "./pages/AddJob.jsx";
 
 /* LOADER */
 import { loader as dashboard } from "./pages/DashboardLayout.jsx";
+import { loader as allJob } from "./pages/AllJobs.jsx";
+
+import AllJobs from "./pages/AllJobs.jsx";
 
 const checkDefaultTheme = () => {
   const isDarkTheme = localStorage.getItem("darkTheme") === "true";
   document.body.classList.toggle("dark-theme", isDarkTheme);
   return isDarkTheme;
 };
-
 const isDarkThemeEnabled = checkDefaultTheme();
 
 const router = createBrowserRouter([
@@ -55,8 +58,8 @@ const router = createBrowserRouter([
         element: <DashboardLayout isDarkThemeEnabled={isDarkThemeEnabled} />,
         loader: dashboard,
         children: [
-          { index: true, element: <AddJob /> },
-          { path: "all-jobs", element: <Stats /> },
+          { index: true, element: <AddJob />, action: addJob },
+          { path: "all-jobs", element: <AllJobs />, loader: allJob },
           { path: "stats", element: <Stats /> },
           { path: "profile", element: <Profile /> },
           { path: "admin", element: <Admin /> },

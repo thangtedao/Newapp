@@ -1,10 +1,17 @@
+import { FaLocationArrow, FaBriefcase, FaCalendarAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import JobInfo from "./JobInfo";
+import { Form } from "react-router-dom";
+import day from "dayjs";
+import advancedFormat from "dayjs/plugin/advancedFormat";
 import styled from "styled-components";
+day.extend(advancedFormat);
 
 const Wrapper = styled.article`
   background: var(--background-secondary-color);
   border-radius: var(--border-radius);
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-rows: 1fr auto;
   box-shadow: var(--shadow-2);
   header {
     padding: 1rem 1.5rem;
@@ -78,4 +85,43 @@ const Wrapper = styled.article`
   }
 `;
 
-export default Wrapper;
+const Job = ({
+  _id,
+  position,
+  company,
+  jobLocation,
+  jobType,
+  createAt,
+  jobStatus,
+}) => {
+  const date = day(createAt).format("MMM Do, YYYY");
+  return (
+    <Wrapper>
+      <header>
+        <div className="main-icon">{company.charAt(0)}</div>
+        <div className="info">
+          <h5>{position}</h5>
+          <p>{company}</p>
+        </div>
+      </header>
+      <div className="content">
+        <div className="content-center">
+          <JobInfo icon={<FaLocationArrow />} text={jobLocation} />
+          <JobInfo icon={<FaCalendarAlt />} text={date} />
+          <JobInfo icon={<FaBriefcase />} text={jobType} />
+          <div className={`status ${jobStatus}`}>{jobStatus}</div>
+          <footer className="actions">
+            <Link className="btn edit-btn">Edit</Link>
+            <Form>
+              <button type="submit" className="btn delete-btn">
+                Delete
+              </button>
+            </Form>
+          </footer>
+        </div>
+      </div>
+    </Wrapper>
+  );
+};
+
+export default Job;
